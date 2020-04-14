@@ -1,0 +1,9 @@
+{
+  "extends": "react-native-wcandillon",
+  "rules": {
+    "react/prefer-stateless-function": "off",
+    "react-native/no-color-literals": 0,
+    "react/no-array-index-key": "off",
+    "react/jsx-no-bind": "off"
+  }
+}
