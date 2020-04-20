@@ -1,13 +1,15 @@
-import { TouchableNativeFeedback } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  Dimensions,
+} from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 
 import { useMemoOne } from "use-memo-one";
-
-import { Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -128,7 +130,7 @@ export default ({ tabs, value }: StaticTabbarProps) => {
 
         return (
           <React.Fragment {...{ key }}>
-            <TouchableNativeFeedback
+            <TouchableWithoutFeedback
               onPress={() => {
                 onPress(key);
                 setindex(key);
@@ -137,7 +139,7 @@ export default ({ tabs, value }: StaticTabbarProps) => {
               <Animated.View style={[styles.tab, { opacity }]}>
                 <Icon name={tab.name} color="black" size={25} />
               </Animated.View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
             <Animated.View
               style={{
                 position: "absolute",

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SafeAreaView, StyleSheet, Dimensions, View } from "react-native";
+import { Dimensions, SafeAreaView, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 
 import * as shape from "d3-shape";
@@ -12,20 +12,20 @@ const { width } = Dimensions.get("window");
 const height = 64;
 const tabs = [
   {
-    name: "grid",
+    name: "grid"
   },
   {
-    name: "list",
+    name: "list"
   },
   {
-    name: "repeat",
+    name: "repeat"
   },
   {
-    name: "map",
+    name: "map"
   },
   {
-    name: "user",
-  },
+    name: "user"
+  }
 ];
 const tabWidth = width / tabs.length;
 const backgroundColor = "white";
@@ -33,16 +33,16 @@ const backgroundColor = "white";
 const getPath = (): string => {
   const left = shape
     .line()
-    .x((d) => d[0])
-    .y((d) => d[1])([
+    .x(d => d[0])
+    .y(d => d[1])([
     [0, 0],
-    [width, 0],
+    [width, 0]
   ]);
 
   const tab = shape
     .line()
-    .x((d) => d[0])
-    .y((d) => d[1])
+    .x(d => d[0])
+    .y(d => d[1])
     .curve(shape.curveBasis)([
     [width, 0],
     [width + 5, 0],
@@ -51,28 +51,35 @@ const getPath = (): string => {
     [width + tabWidth - 15, height],
     [width + tabWidth - 10, 10],
     [width + tabWidth - 5, 0],
-    [width + tabWidth, 0],
+    [width + tabWidth, 0]
   ]);
 
   const right = shape
     .line()
-    .x((d) => d[0])
-    .y((d) => d[1])([
+    .x(d => d[0])
+    .y(d => d[1])([
     [width + tabWidth, 0],
     [width * 2, 0],
     [width * 2, height],
     [0, height],
-    [0, 0],
+    [0, 0]
   ]);
 
   return `${left} ${tab} ${right}`;
 };
 const d = getPath();
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor
+  }
+});
+
 export default () => {
   const value = new Animated.Value<number>(0);
   const translateX = value.interpolate({
     inputRange: [0, width],
-    outputRange: [-width, 0],
+    outputRange: [-width, 0]
   });
   return (
     <>
@@ -84,7 +91,6 @@ export default () => {
         >
           <Path fill={backgroundColor} d={d} />
         </AnimatedSVG>
-
         <View style={StyleSheet.absoluteFill}>
           <StaticTabbar {...{ tabs, value }} />
         </View>
@@ -93,10 +99,3 @@ export default () => {
     </>
   );
 };
-// eslint-disable-next-line react/prefer-stateless-function
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor,
-  },
-});
